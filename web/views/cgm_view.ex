@@ -1,7 +1,7 @@
 defmodule ExDiagcare.CgmView do
   use ExDiagcare.Web, :view
 
-  def index(conn, %{cgm_events: cgm_events}) do
-    render conn, "index.html", cgm_events: cgm_events
+  def events_with_index(cgm_events) do
+    Enum.with_index(cgm_events)
   end
 end
