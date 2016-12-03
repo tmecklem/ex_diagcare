@@ -17,6 +17,8 @@ defmodule ExDiagcare.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/cgm", CgmController, :index
+    get "/cgm/new", CgmController, :new
+    get "/cgm/:page_hash", CgmController, :show
     post "/cgm", CgmController, :decode_cgm
   end
 
