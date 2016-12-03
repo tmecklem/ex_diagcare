@@ -11,9 +11,11 @@ $metadata-color: #999;
     margin-top: 7px;
 
     .show-bar {
+        font-family: "Lucida Console", Monaco, monospace;
         padding: 7px 10px;
         font-size: 1.2em;
         text-align: right;
+        font-weight: bolder;
     }
 
     .info-box {
@@ -32,7 +34,6 @@ $metadata-color: #999;
 .glucose-event-sensor_glucose_value {
     .show-bar {
         background-color: $glucose-color;
-        font-family: "Lucida Console", Monaco, monospace;
     }
 
     .info-box {
@@ -46,18 +47,21 @@ $metadata-color: #999;
     .show-bar {
         background-color: $reference-color;
     }
-}
 
-.glucose-event-cal_bg_for_gh {
-    .show-bar {
-        background-color: $metadata-color;
+    .info-box {
+        border-color: $reference-color;
     }
 }
 
+ .glucose-event-cal_bg_for_gh,
 .glucose-event-null_byte,
 .glucose-event-data_end,
 .glucose-event-nineteen_something {
     .show-bar {
         background-color: $metadata-color;
+    }
+
+    .info-box {
+        border-color: $metadata-color;
     }
 }

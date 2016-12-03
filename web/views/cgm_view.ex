@@ -10,7 +10,7 @@ defmodule ExDiagcare.CgmView do
   def format_event_info(event) do
     case event do
       {:sensor_glucose_value, data} ->
-        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv}"
+        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
       {:data_end, _} ->
         "Data End"
       {:null_byte, _} ->
@@ -24,7 +24,7 @@ defmodule ExDiagcare.CgmView do
       {:sensor_calibration_factor, data} ->
         "<i class=\"fa fa-circle\" aria-hidden=\"true\"></i> #{data[:factor]} Sensor Calibration Factor"
       {:cal_bg_for_gh, data} ->
-        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data[:amount]} Cal BG For GH"
+        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data[:amount]} mg/dl Cal BG For GH"
       _ ->
         ""
     end
