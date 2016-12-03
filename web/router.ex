@@ -16,10 +16,7 @@ defmodule ExDiagcare.Router do
   scope "/", ExDiagcare do
     pipe_through :browser # Use the default browser stack
 
-    get "/cgm", CgmController, :index
-    get "/cgm/new", CgmController, :new
-    get "/cgm/:page_hash", CgmController, :show
-    post "/cgm", CgmController, :decode_cgm
+    resources "/cgm_pages", CgmPageController, except: [:edit, :update, :delete]
   end
 
   # Other scopes may use custom stacks.

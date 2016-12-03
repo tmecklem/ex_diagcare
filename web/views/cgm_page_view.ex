@@ -1,4 +1,4 @@
-defmodule ExDiagcare.CgmView do
+defmodule ExDiagcare.CgmPageView do
   use ExDiagcare.Web, :view
 
   def events_with_index(cgm_events) do
