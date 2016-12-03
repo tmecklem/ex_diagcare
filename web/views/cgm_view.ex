@@ -5,6 +5,16 @@ defmodule ExDiagcare.CgmView do
     Enum.with_index(cgm_events)
   end
 
+  def event_rows(events), do: event_rows(events, [[]])
+  def event_rows([], rows), do: Enum.reverse(rows)
+  def event_rows([event | rest], [row | tail]) do
+    current_row_size = event_size(event) + Enum.reduce(row, 0, fn (event, acc) -> acc + event_size(event) end)
+    cond do
+      current_row_size > 12 -> event_rows(rest, [[event] | [Enum.reverse(row) | tail]])
+      true                  -> event_rows(rest, [[event | row] | tail])
+    end
+  end
+
   def event_type({event_type, _}), do: event_type
 
   def format_event_info(event) do
