@@ -8,3 +8,12 @@ config :ex_diagcare, ExDiagcare.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Configure your database
+config :ex_diagcare, ExDiagcare.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "ex_diagcare_test",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox

@@ -5,6 +5,10 @@
 # is restricted to this project.
 use Mix.Config
 
+# General application configuration
+config :ex_diagcare,
+  ecto_repos: [ExDiagcare.Repo]
+
 # Configures the endpoint
 config :ex_diagcare, ExDiagcare.Endpoint,
   url: [host: "localhost"],
