@@ -1,0 +1,12 @@
+<div class="row">
+  <%= for {event, index} <- events_with_index(@cgm_events) do %>
+    <div class="col-sm-<%= event_size(event) %> glucose-event glucose-event-<%= event_type(event) %>" id="event_<%= index %>">
+      <div class="row">
+        <div class="show-bar"><%= format_hex(event) %></div>
+        <div class="info-box"><%= raw format_event_info(event) %>
+          <div class="timestamp"><%= raw format_timestamp(event) %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,12 +1,19 @@
-<div class="row">
-  <%= for {event, index} <- events_with_index(@cgm_events) do %>
-    <div class="col-sm-<%= event_size(event) %> glucose-event glucose-event-<%= event_type(event) %>" id="event_<%= index %>">
-      <div class="row">
-        <div class="show-bar"><%= format_hex(event) %></div>
-        <div class="info-box"><%= raw format_event_info(event) %>
-          <div class="timestamp"><%= raw format_timestamp(event) %></div>
-        </div>
+<h2>Decode a CGM Page!</h2>
+<h4>Need a sample file? Try: <a href="/test-cgm.data">this one</a></h4>
+
+
+<div class="container">
+  <div class="row">
+
+    <form action="cgm" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label>Binary CGM Page</label>
+        <input class="form-control" id="cgm_page" name="cgm[page]" type="file">
       </div>
-    </div>
-  <% end %>
+
+      <div class="form-group">
+        <%= submit "Submit", class: "btn btn-primary" %>
+      </div>
+    </form>
+  </div>
 </div>

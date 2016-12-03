@@ -13,14 +13,28 @@ defmodule ExDiagcare.CgmView do
         "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
       {:data_end, _} ->
         "Data End"
+      {:unknown, _} ->
+        "Unknown"
       {:null_byte, _} ->
         "No Data"
       {:ten_something, _} ->
         "Opcode 0x10"
       {:nineteen_something, _} ->
         "Opcode 0x13"
+      {:sensor_status, _} ->
+        "Sensor Status"
+      {:sensor_sync, _} ->
+        "Sensor Sync"
+      {:sensor_calibration, _} ->
+        "Sensor Calibration"
+      {:sensor_weak_signal, _} ->
+        "Sensor Weak Signal"
+      {:fokko7, _} ->
+        "Opcode 0x07"
       {:sensor_timestamp, _} ->
         "Sensor Timestamp"
+      {:datetime_change, _} ->
+        "Date/Time Change"
       {:sensor_calibration_factor, data} ->
         "<i class=\"fa fa-circle\" aria-hidden=\"true\"></i> #{data[:factor]} Sensor Calibration Factor"
       {:cal_bg_for_gh, data} ->
@@ -52,6 +66,10 @@ defmodule ExDiagcare.CgmView do
       :nineteen_something   -> 2
       :data_end             -> 2
       :null_byte            -> 2
+      :unknown              -> 2
+      :sensor_weak_signal   -> 2
+      :sensor_calibration   -> 2
+      :fokko7               -> 2
       _                     -> 4
     end
   end
