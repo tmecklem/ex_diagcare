@@ -1,0 +1,63 @@
+// $icon-font-path: "/fonts/";
+@import "bootstrap";
+@import "font-awesome";
+
+$glucose-color: #fd8d25;
+$reference-color: #50aff4;
+$metadata-color: #999;
+
+.glucose-event {
+    border: 2px solid white;
+    margin-top: 7px;
+
+    .show-bar {
+        padding: 7px 10px;
+        font-size: 1.2em;
+        text-align: right;
+    }
+
+    .info-box {
+        border: 2px solid;
+        border-width: 0px 1px 1px 1px;
+        padding: 7px 10px;
+        font-size: 1.2em;
+
+        .timestamp {
+            font-size: 0.8em;
+            color: #AAAAAA;
+        }
+    }
+}
+
+.glucose-event-sensor_glucose_value {
+    .show-bar {
+        background-color: $glucose-color;
+        font-family: "Lucida Console", Monaco, monospace;
+    }
+
+    .info-box {
+        border-color: $glucose-color;
+    }
+}
+
+.glucose-event-sensor_timestamp,
+.glucose-event-ten_something,
+.glucose-event-sensor_calibration_factor {
+    .show-bar {
+        background-color: $reference-color;
+    }
+}
+
+.glucose-event-cal_bg_for_gh {
+    .show-bar {
+        background-color: $metadata-color;
+    }
+}
+
+.glucose-event-null_byte,
+.glucose-event-data_end,
+.glucose-event-nineteen_something {
+    .show-bar {
+        background-color: $metadata-color;
+    }
+}

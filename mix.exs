@@ -34,6 +34,7 @@ defmodule ExDiagcare.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
+     {:timex, "~> 3.0"},
      {:ex_decocare, "~> 1.0", github: "tmecklem/ex_decocare"}]
   end
 end

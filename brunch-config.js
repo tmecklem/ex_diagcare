@@ -25,6 +25,7 @@ exports.config = {
         after: ["web/static/css/app.css"] // concat app.css last
       }
     },
+
     templates: {
       joinTo: "js/app.js"
     }
@@ -49,21 +50,44 @@ exports.config = {
     public: "priv/static"
   },
 
-  // Configure your plugins
   plugins: {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+
+    sass: {
+      options: {
+        includePaths: [
+          "node_modules/bootstrap-sass/assets/stylesheets",
+          "node_modules/font-awesome/scss"
+        ],
+        precision: 8
+      }
+    },
+    copycat: {
+      "fonts": [
+        "node_modules/bootstrap-sass/assets/fonts/bootstrap",
+        "node_modules/font-awesome/fonts"
+      ]
     }
   },
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      "js/app.js": [
+        "bootstrap-sass",
+        "web/static/js/app"
+      ]
     }
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    whitelist: ["phoenix", "phoenix_html", "jquery", "bootstrap-sass"],
+    globals: {
+      $: 'jquery',
+      jQuery: 'jquery'
+    }
   }
 };
