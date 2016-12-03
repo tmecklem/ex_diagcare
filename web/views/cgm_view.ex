@@ -35,6 +35,8 @@ defmodule ExDiagcare.CgmView do
         "Sensor Timestamp"
       {:datetime_change, _} ->
         "Date/Time Change"
+      {:battery_change, _} ->
+        "Battery Change"
       {:sensor_calibration_factor, data} ->
         "<i class=\"fa fa-circle\" aria-hidden=\"true\"></i> #{data[:factor]} Sensor Calibration Factor"
       {:cal_bg_for_gh, data} ->
