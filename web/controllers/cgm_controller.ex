@@ -27,7 +27,8 @@ defmodule ExDiagcare.CgmPageController do
   def show(conn, %{"id" => page_hash}) do
     cgm_page = Repo.get_by(CgmPage, page_hash: page_hash)
     {:ok, cgm_events} = Cgm.decode(cgm_page.page_data)
-    render conn, "decode_cgm.html", cgm_events: cgm_events
+    {:ok, %{processed: processed, in_transition: in_transition}} = Timestamper.timestamp_events(cgm_events)
+    render conn, "decode_cgm.html", cgm_events: in_transition ++ processed
   end
 
   defp accumulate_events(cgm_page, events) do
