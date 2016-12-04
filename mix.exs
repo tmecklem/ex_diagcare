@@ -39,7 +39,7 @@ defmodule ExDiagcare.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:timex, "~> 3.0"},
-     {:ex_decocare, "~> 1.0", github: "tmecklem/ex_decocare"}]
+     {:ex_decocare, github: "tmecklem/ex_decocare", branch: "master"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

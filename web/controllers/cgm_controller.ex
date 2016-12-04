@@ -2,7 +2,19 @@ defmodule ExDiagcare.CgmPageController do
   use ExDiagcare.Web, :controller
   alias ExDiagcare.CgmPage
 
+  def index(conn, %{"ids" => ids}) do
+    {:ok, %{processed: cgm_events}} = ids
+    |> Enum.map(fn(id) -> Repo.get_by(CgmPage, page_hash: id) end)
+    |> Enum.reduce([], &(accumulate_events(&1, &2)))
+    |> Timestamper.timestamp_events
+
+    IO.inspect cgm_events
+
+    render conn, "decode_cgm.html", cgm_events: cgm_events
+  end
+
   def index(conn, _params), do: redirect conn, to: cgm_page_path(conn, :new)
+
   def new(conn, _params), do: render conn, "new.html"
 
   def create(conn, %{"page_file" => page_file}) do
@@ -16,5 +28,10 @@ defmodule ExDiagcare.CgmPageController do
     cgm_page = Repo.get_by(CgmPage, page_hash: page_hash)
     {:ok, cgm_events} = Cgm.decode(cgm_page.page_data)
     render conn, "decode_cgm.html", cgm_events: cgm_events
+  end
+
+  defp accumulate_events(cgm_page, events) do
+    {:ok, cgm_events} = Cgm.decode(cgm_page.page_data)
+    events ++ cgm_events
   end
 end
