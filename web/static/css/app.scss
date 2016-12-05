@@ -3,6 +3,7 @@
 @import "font-awesome";
 
 $glucose-color: #fd8d25;
+$warning-color: #d53e50;
 $reference-color: #50aff4;
 $metadata-color: #999;
 
@@ -43,9 +44,7 @@ $metadata-color: #999;
     }
 }
 
-.glucose-event-sensor_timestamp,
-.glucose-event-ten_something,
-.glucose-event-sensor_calibration_factor {
+.glucose-event-sensor_timestamp {
     .show-bar {
         background-color: $reference-color;
     }
@@ -55,11 +54,23 @@ $metadata-color: #999;
     }
 }
 
+.glucose-event-sensor_data_low {
+    .show-bar {
+        background-color: $warning-color;
+    }
+
+    .info-box {
+        border-color: $warning-color;
+    }
+}
+
 .glucose-event-cal_bg_for_gh,
 .glucose-event-unknown,
 .glucose-event-null_byte,
 .glucose-event-sensor_status,
 .glucose-event-sensor_sync,
 .glucose-event-data_end,
-.glucose-event-nineteen_something {
+.glucose-event-nineteen_something,
+.glucose-event-ten_something,
+.glucose-event-sensor_calibration_factor {
 }

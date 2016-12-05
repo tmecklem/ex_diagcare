@@ -21,6 +21,8 @@ defmodule ExDiagcare.CgmPageView do
     case event do
       {:sensor_glucose_value, data} ->
         "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
+      {:sensor_data_low, data} ->
+        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
       {:data_end, _} ->
         "Data End"
       {:unknown, _} ->
@@ -35,14 +37,14 @@ defmodule ExDiagcare.CgmPageView do
         "Sensor Status"
       {:sensor_sync, _} ->
         "Sensor Sync"
-      {:sensor_calibration, _} ->
-        "Sensor Calibration"
+      {:sensor_calibration, event_info} ->
+        "Sensor Calibration #{event_info[:waiting]}"
       {:sensor_weak_signal, _} ->
         "Sensor Weak Signal"
       {:fokko7, _} ->
         "Opcode 0x07"
-      {:sensor_timestamp, _} ->
-        "Sensor Timestamp"
+      {:sensor_timestamp, event_info} ->
+        "Sensor Timestamp [#{event_info[:event_type]}]"
       {:datetime_change, _} ->
         "Date/Time Change"
       {:battery_change, _} ->
@@ -74,6 +76,7 @@ defmodule ExDiagcare.CgmPageView do
   def event_size({event_type, _}) do
     case event_type do
       :sensor_glucose_value -> 2
+      :sensor_data_low -> 2
       :ten_something        -> 4
       :nineteen_something   -> 2
       :data_end             -> 2
