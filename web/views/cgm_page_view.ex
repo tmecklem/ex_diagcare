@@ -19,12 +19,20 @@ defmodule ExDiagcare.CgmPageView do
 
   def format_event_info(event) do
     case event do
+      {:data_end, _} ->
+        "Data End"
+      {:sensor_weak_signal, _} ->
+        "Sensor Weak Signal"
+      {:sensor_calibration, event_info} ->
+        "Sensor Calibration #{event_info[:waiting]}"
+      {:sensor_packet, event_info} ->
+        "Sensor Packet [#{event_info[:packet_type]}]"
+      {:sensor_error, event_info} ->
+        "Sensor Error [#{event_info[:error_type]}]"
       {:sensor_glucose_value, data} ->
         "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
       {:sensor_data_low, data} ->
         "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
-      {:data_end, _} ->
-        "Data End"
       {:unknown, _} ->
         "Unknown"
       {:null_byte, _} ->
