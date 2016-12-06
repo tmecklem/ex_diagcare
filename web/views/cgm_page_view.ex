@@ -22,7 +22,7 @@ defmodule ExDiagcare.CgmPageView do
       {:sensor_weak_signal, _} ->
         "Sensor Weak Signal"
       {:sensor_calibration, event_info} ->
-        "Sensor Calibration #{event_info[:waiting]}"
+        "Sensor Calibration #{event_info[:calibration_type]}"
       {:sensor_packet, event_info} ->
         "Sensor Packet [#{event_info[:packet_type]}]"
       {:sensor_error, event_info} ->
