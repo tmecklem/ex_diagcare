@@ -8,8 +8,6 @@ defmodule ExDiagcare.CgmPageController do
     |> Enum.reduce([], &(accumulate_events(&1, &2)))
     |> Timestamper.timestamp_events
 
-    IO.inspect cgm_events
-
     render conn, "decode_cgm.html", cgm_events: cgm_events
   end
 
