@@ -19,8 +19,6 @@ defmodule ExDiagcare.CgmPageView do
 
   def format_event_info(event) do
     case event do
-      {:data_end, _} ->
-        "Data End"
       {:sensor_weak_signal, _} ->
         "Sensor Weak Signal"
       {:sensor_calibration, event_info} ->
@@ -29,38 +27,34 @@ defmodule ExDiagcare.CgmPageView do
         "Sensor Packet [#{event_info[:packet_type]}]"
       {:sensor_error, event_info} ->
         "Sensor Error [#{event_info[:error_type]}]"
-      {:sensor_glucose_value, data} ->
-        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
       {:sensor_data_low, data} ->
+        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
+      {:fokko7, _} ->
+        "Opcode 0x07"
+      {:sensor_timestamp, event_info} ->
+        "Sensor Timestamp [#{event_info[:event_type]}]"
+      {:battery_change, _} ->
+        "Battery Change"
+      {:sensor_status, event_info} ->
+        "Sensor Status [#{event_info[:status_type]}]"
+      {:datetime_change, _} ->
+        "Date/Time Change"
+      {:sensor_sync, event_info} ->
+        "Sensor Sync [#{event_info[:sync_type]}]"
+      {:cal_bg_for_gh, data} ->
+        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data[:amount]} mg/dl Cal BG For GH [#{data[:origin_type]}]"
+      {:sensor_calibration_factor, data} ->
+        "<i class=\"fa fa-circle\" aria-hidden=\"true\"></i> #{data[:factor]} Sensor Calibration Factor"
+      {:ten_something, _} ->
+        "Opcode 0x10"
+      {:nineteen_something, _} ->
+        "Opcode 0x13"
+      {:sensor_glucose_value, data} ->
         "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
       {:unknown, _} ->
         "Unknown"
       {:null_byte, _} ->
         "No Data"
-      {:ten_something, _} ->
-        "Opcode 0x10"
-      {:nineteen_something, _} ->
-        "Opcode 0x13"
-      {:sensor_status, _} ->
-        "Sensor Status"
-      {:sensor_sync, _} ->
-        "Sensor Sync"
-      {:sensor_calibration, event_info} ->
-        "Sensor Calibration #{event_info[:waiting]}"
-      {:sensor_weak_signal, _} ->
-        "Sensor Weak Signal"
-      {:fokko7, _} ->
-        "Opcode 0x07"
-      {:sensor_timestamp, event_info} ->
-        "Sensor Timestamp [#{event_info[:event_type]}]"
-      {:datetime_change, _} ->
-        "Date/Time Change"
-      {:battery_change, _} ->
-        "Battery Change"
-      {:sensor_calibration_factor, data} ->
-        "<i class=\"fa fa-circle\" aria-hidden=\"true\"></i> #{data[:factor]} Sensor Calibration Factor"
-      {:cal_bg_for_gh, data} ->
-        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data[:amount]} mg/dl Cal BG For GH"
       _ ->
         ""
     end
@@ -83,17 +77,25 @@ defmodule ExDiagcare.CgmPageView do
 
   def event_size({event_type, _}) do
     case event_type do
-      :sensor_glucose_value -> 2
-      :sensor_data_low -> 2
-      :ten_something        -> 4
-      :nineteen_something   -> 2
-      :data_end             -> 2
-      :null_byte            -> 2
-      :unknown              -> 2
-      :sensor_weak_signal   -> 2
-      :sensor_calibration   -> 2
-      :fokko7               -> 2
-      _                     -> 4
+      :sensor_weak_signal        -> 2
+      :sensor_calibration        -> 2
+      :sensor_packet             -> 2
+      :sensor_error              -> 2
+      :sensor_data_low           -> 2
+      :fokko7                    -> 2
+      :sensor_timestamp          -> 4
+      :battery_change            -> 4
+      :sensor_status             -> 4
+      :datetime_change           -> 4
+      :sensor_sync               -> 4
+      :cal_bg_for_gh             -> 4
+      :sensor_calibration_factor -> 4
+      :ten_something             -> 4
+      :nineteen_something        -> 2
+      :sensor_glucose_value      -> 2
+      :null_byte                 -> 2
+      :unknown                   -> 2
+      _                          -> 4
     end
   end
 end
