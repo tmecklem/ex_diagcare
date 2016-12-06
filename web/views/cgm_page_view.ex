@@ -6,7 +6,7 @@ defmodule ExDiagcare.CgmPageView do
   end
 
   def event_rows(events), do: event_rows(events, [[]])
-  def event_rows([], rows), do: Enum.reverse(rows)
+  def event_rows([], [row | tail]), do: Enum.reverse([Enum.reverse(row) | tail])
   def event_rows([event | rest], [row | tail]) do
     current_row_size = event_size(event) + Enum.reduce(row, 0, fn (event, acc) -> acc + event_size(event) end)
     cond do
