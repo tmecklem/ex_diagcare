@@ -60,6 +60,7 @@ defmodule ExDiagcare.CgmPageView do
     end
   end
 
+  def format_timestamp({_, %{timestamp: nil}}), do: ""
   def format_timestamp({_, %{timestamp: ts}}) do
     "<i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> " <>
       Timex.format!(ts, "%m/%d/%y %H:%M", :strftime)
