@@ -5,6 +5,7 @@
 $glucose-color: #fd8d25;
 $warning-color: #d53e50;
 $reference-color: #50aff4;
+$other-relative-event: #fed939;
 $metadata-color: #999;
 
 .glucose-event {
@@ -54,6 +55,7 @@ $metadata-color: #999;
     }
 }
 
+.glucose-event-sensor_error,
 .glucose-event-sensor_data_low {
     .show-bar {
         background-color: $warning-color;
@@ -64,13 +66,14 @@ $metadata-color: #999;
     }
 }
 
-.glucose-event-cal_bg_for_gh,
-.glucose-event-unknown,
-.glucose-event-null_byte,
-.glucose-event-sensor_status,
-.glucose-event-sensor_sync,
-.glucose-event-data_end,
-.glucose-event-nineteen_something,
-.glucose-event-ten_something,
-.glucose-event-sensor_calibration_factor {
+.glucose-event-sensor_weak_signal,
+.glucose-event-sensor_calibration,
+.glucose-event-sensor_packet {
+    .show-bar {
+        background-color: $other-relative-event;
+    }
+
+    .info-box {
+        border-color: $other-relative-event;
+    }
 }
