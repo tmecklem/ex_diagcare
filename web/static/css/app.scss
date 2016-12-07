@@ -56,6 +56,7 @@ $metadata-color: #999;
 }
 
 .glucose-event-sensor_error,
+.glucose-event-sensor_data_high,
 .glucose-event-sensor_data_low {
     .show-bar {
         background-color: $warning-color;

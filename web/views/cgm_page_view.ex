@@ -28,9 +28,9 @@ defmodule ExDiagcare.CgmPageView do
       {:sensor_error, event_info} ->
         "Sensor Error [#{event_info[:error_type]}]"
       {:sensor_data_low, data} ->
-        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl"
-      {:fokko7, _} ->
-        "Opcode 0x07"
+        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl Sensor Data Low"
+      {:sensor_data_high, data} ->
+        "<i class=\"fa fa-tint\" aria-hidden=\"true\"></i> #{data.sgv} mg/dl Sensor Data High"
       {:sensor_timestamp, event_info} ->
         "Sensor Timestamp [#{event_info[:event_type]}]"
       {:battery_change, _} ->
@@ -83,7 +83,7 @@ defmodule ExDiagcare.CgmPageView do
       :sensor_packet             -> 2
       :sensor_error              -> 2
       :sensor_data_low           -> 2
-      :fokko7                    -> 2
+      :sensor_data_high          -> 2
       :sensor_timestamp          -> 4
       :battery_change            -> 4
       :sensor_status             -> 4
