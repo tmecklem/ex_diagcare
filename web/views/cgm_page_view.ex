@@ -19,6 +19,8 @@ defmodule ExDiagcare.CgmPageView do
 
   def format_event_info(event) do
     case event do
+      {:data_end, _} ->
+        "Data End"
       {:sensor_weak_signal, _} ->
         "Sensor Weak Signal"
       {:sensor_calibration, event_info} ->
@@ -78,6 +80,7 @@ defmodule ExDiagcare.CgmPageView do
 
   def event_size({event_type, _}) do
     case event_type do
+      :data_end                  -> 2
       :sensor_weak_signal        -> 2
       :sensor_calibration        -> 2
       :sensor_packet             -> 2
