@@ -1,0 +1,14 @@
+<%= for event_row <- event_rows(@history_events) do %>
+  <div class="row">
+    <%= for event <- event_row do %>
+      <div class="col-sm-<%= event_size(event) %> history-event history-event-<%= event_type(event) %>">
+        <div class="row">
+          <div class="show-bar"><%= format_hex(event) %></div>
+          <div class="info-box"><%= raw format_event_info(event) %>
+            <div class="timestamp"><%= raw format_timestamp(event) %></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

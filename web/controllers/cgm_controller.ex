@@ -1,12 +1,12 @@
 defmodule ExDiagcare.CgmPageController do
   use ExDiagcare.Web, :controller
   alias ExDiagcare.CgmPage
+  alias Decocare.Cgm
 
   def index(conn, %{"ids" => ids}) do
     cgm_events = ids
     |> Enum.map(fn(id) -> Repo.get_by(CgmPage, page_hash: id) end)
     |> Enum.reduce([], &(accumulate_events(&1, &2)))
-    |> Timestamper.timestamp_events
 
     render conn, "decode_cgm.html", cgm_events: cgm_events
   end
@@ -25,8 +25,7 @@ defmodule ExDiagcare.CgmPageController do
   def show(conn, %{"id" => page_hash}) do
     cgm_page = Repo.get_by(CgmPage, page_hash: page_hash)
     {:ok, cgm_events} = Cgm.decode(cgm_page.page_data)
-    processed = Timestamper.timestamp_events(cgm_events)
-    render conn, "decode_cgm.html", cgm_events: processed
+    render conn, "decode_cgm.html", cgm_events: cgm_events
   end
 
   defp accumulate_events(cgm_page, events) do

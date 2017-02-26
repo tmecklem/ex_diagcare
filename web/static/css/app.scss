@@ -3,12 +3,16 @@
 @import "font-awesome";
 
 $glucose-color: #fd8d25;
+$basal-color: #50aff4;
+$bolus-color: #fed939;
+$other-history-event: #fd8d25;
 $warning-color: #d53e50;
+$success-color: #00bb27;
 $reference-color: #50aff4;
 $other-relative-event: #fed939;
 $metadata-color: #999;
 
-.glucose-event {
+.glucose-event, .history-event {
     border: 2px solid white;
     margin-top: 7px;
 
@@ -32,6 +36,59 @@ $metadata-color: #999;
             font-size: 0.8em;
             color: #AAAAAA;
         }
+    }
+}
+
+.history-event-cal_bg_for_ph, .history-event-bg_received {
+    .show-bar {
+        background-color: $other-history-event;
+    }
+
+    .info-box {
+        border-color: $other-history-event;
+    }
+}
+
+.history-event-pump_suspend, .history-event-alarm_sensor {
+    .show-bar {
+        background-color: $warning-color;
+    }
+
+    .info-box {
+        border-color: $warning-color;
+    }
+}
+
+.history-event-pump_resume {
+    .show-bar {
+        background-color: $success-color;
+    }
+
+    .info-box {
+        border-color: $success-color;
+    }
+}
+
+.history-event-bolus_normal,
+.history-event-bolus_wizard_estimate,
+.history-event-change_bolus_wizard_setup,
+.history-event-unabsorbed_insulin {
+    .show-bar {
+        background-color: $bolus-color;
+    }
+
+    .info-box {
+        border-color: $bolus-color;
+    }
+}
+
+.history-event-temp_basal, .history-event-temp_basal_duration {
+    .show-bar {
+        background-color: $basal-color;
+    }
+
+    .info-box {
+        border-color: $basal-color;
     }
 }
 

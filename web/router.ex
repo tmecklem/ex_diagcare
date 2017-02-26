@@ -17,6 +17,7 @@ defmodule ExDiagcare.Router do
     pipe_through :browser # Use the default browser stack
 
     resources "/cgm_pages", CgmPageController, except: [:edit, :update, :delete]
+    resources "/history_pages", HistoryPageController, except: [:edit, :update, :delete]
   end
 
   # Other scopes may use custom stacks.
