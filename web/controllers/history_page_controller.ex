@@ -24,13 +24,14 @@ defmodule ExDiagcare.HistoryPageController do
 
   def show(conn, %{"id" => page_hash}) do
     history_page = Repo.get_by(HistoryPage, page_hash: page_hash)
-    {:ok, history_events} = History.decode(history_page.page_data, history_page.pump_model)
-    IO.inspect history_events
+    {:ok, model_number} = Decocare.PumpModel.model_number(history_page.pump_model)
+    {:ok, history_events} = History.decode(history_page.page_data, model_number)
     render conn, "decode_history.html", history_events: history_events
   end
 
   defp accumulate_events(history_page, events) do
-    {:ok, history_events} = History.decode(history_page.page_data, history_page.pump_model)
+    {:ok, model_number} = Decocare.PumpModel.model_number(history_page.pump_model)
+    {:ok, history_events} = History.decode(history_page.page_data, model_number)
     events ++ history_events
   end
 end
