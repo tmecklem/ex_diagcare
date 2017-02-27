@@ -30,7 +30,7 @@ defmodule ExDiagcare.HistoryPageController do
   end
 
   defp accumulate_events(history_page, events) do
-    {:ok, history_events} = History.decode(history_page.page_data)
+    {:ok, history_events} = History.decode(history_page.page_data, history_page.pump_model)
     events ++ history_events
   end
 end
