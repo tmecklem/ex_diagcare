@@ -1,7 +1,8 @@
 defmodule ExDiagcare.HistoryPageController do
   use ExDiagcare.Web, :controller
   alias ExDiagcare.HistoryPage
-  alias Decocare.History, as: History
+  alias Pummpcomm.History
+  alias Pummpcomm.PumpModel
 
   def index(conn, %{"ids" => ids}) do
     history_events = ids
@@ -24,13 +25,13 @@ defmodule ExDiagcare.HistoryPageController do
 
   def show(conn, %{"id" => page_hash}) do
     history_page = Repo.get_by(HistoryPage, page_hash: page_hash)
-    {:ok, model_number} = Decocare.PumpModel.model_number(history_page.pump_model)
+    {:ok, model_number} = PumpModel.model_number(history_page.pump_model)
     {:ok, history_events} = History.decode(history_page.page_data, model_number)
     render conn, "decode_history.html", history_events: history_events
   end
 
   defp accumulate_events(history_page, events) do
-    {:ok, model_number} = Decocare.PumpModel.model_number(history_page.pump_model)
+    {:ok, model_number} = PumpModel.model_number(history_page.pump_model)
     {:ok, history_events} = History.decode(history_page.page_data, model_number)
     events ++ history_events
   end

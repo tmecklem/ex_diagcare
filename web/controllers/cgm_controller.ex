@@ -1,7 +1,7 @@
 defmodule ExDiagcare.CgmPageController do
   use ExDiagcare.Web, :controller
   alias ExDiagcare.CgmPage
-  alias Decocare.Cgm
+  alias Pummpcomm.Cgm
 
   def index(conn, %{"ids" => ids}) do
     cgm_events = ids
